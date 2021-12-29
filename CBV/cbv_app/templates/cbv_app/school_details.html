@@ -1,0 +1,32 @@
+{% extends 'cbv_app/cbv_app_base.html' %}
+{% block body_block %}
+<div class="jumbotron">
+    <h1>Welcome to the School Detail Page</h1><br>
+    <h2>School Detail:</h2>
+    <p>Name: {{school_detail.name}}</p>
+    <p>Principal: {{school_detail.principle}}</p>
+    <p>Location: {{school_detail.location}}</p>
+    <h2>Students :</h2>
+
+<!--    in the below line the 'students' in school_detail.students.all
+belongs to the related_name we passed in Student CBV as a foreignkey to connect to to the School CBV -->
+
+<!--  WITH RELATED KEY:    for student in school_detail.xyz.all -->
+
+<!--    WITHOUT RELATED KEY-->
+    {% for student in school_detail.student_set.all %}
+
+        <ul>
+            <li><p> {{student.name}} who is {{student.age}} years old.</p></li>
+        </ul>
+    {% endfor %}
+
+</div>
+
+<div class="container">
+    <p><a class="btn btn-warning" href="{% url 'cbv_app:update' pk=school_detail.pk %}">Update</a> </p>
+    <p><a class="btn btn-danger" href="{% url 'cbv_app:delete' pk=school_detail.pk %}">Update</a> </p>
+
+</div>
+
+{% endblock %}
